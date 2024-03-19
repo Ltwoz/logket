@@ -1,9 +1,12 @@
+const path = require("node:path");
 const { Logger, LogConfig } = require("./index");
 
-const logger = Logger.with_config(LogConfig.from_file("./config.json"));
+async function main() {
+  const logger = Logger.with_config(
+    LogConfig.from_file(path.join(__dirname, "config.json"))
+  );
+  await logger.init();
+  console.log("End of the file");
+}
 
-logger.debug("Hello debug");
-logger.info("Hello info");
-logger.warn("Hello warning");
-logger.error("Hello error");
-logger.critical("Hello critical");
+main();
